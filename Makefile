@@ -1,7 +1,6 @@
 CC=gcc
 CFLAGS=-O0 -g
-SRCDIR=src
 
 
-teot2eb: $(SRCDIR)/main.c $(SRCDIR)/main.h
+teot2eb: $(wildcard *.c)
 	$(CC) $(CFLAGS) -o $@ $^
