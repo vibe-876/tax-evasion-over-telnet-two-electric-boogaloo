@@ -8,4 +8,4 @@ teot2eb: $(wildcard *.c) $(wildcard *.h)
 
 ## Add each bin file here.
 clean::
-	rm physics teot2eb
+	rm teot2eb
