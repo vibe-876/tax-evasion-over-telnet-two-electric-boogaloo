@@ -26,19 +26,12 @@ typedef struct PlayerStruct {
 } Player;
 
 typedef struct MapStruct {
-<<<<<<< HEAD
   char block[MAP_SIZE][MAP_SIZE];
   HMRCEmployee hmrc_zombies[MAX_ZOMBIES];
 } Map;
 
+
 Map new_map();
-
-=======
-  char block[1024];
-  HMRCEmployee hmrc_zombies[21];
-} Map;
-
 void tick(Map *map);
->>>>>>> 87504ee (Added some stuff to physics.)
 void move_player(Player *player);
 void move_hmrc(HMRCEmployee hmrc);
