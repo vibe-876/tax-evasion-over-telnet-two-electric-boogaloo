@@ -1,8 +1,8 @@
-typedef struct MapStruct {
-  char block[1024];
-  unsigned char max_zombies;
-  unsigned char no_zombies;
-} Map;
+typedef enum WeaponEnum {
+  axe,
+  moist_nugget,
+  blunderbuss
+} Weapon;
 
 typedef struct BlockStruct {
   char x;
@@ -10,7 +10,6 @@ typedef struct BlockStruct {
 } Block;
 
 typedef struct HMRCEmployeeStruct {
-  int health;
   char x;
   char y;
   char damage;
@@ -20,11 +19,13 @@ typedef struct HMRCEmployeeStruct {
 typedef struct PlayerStruct {
   char x;
   char y;
-  enum Weapon weapon;
+  Weapon weapon;
 } Player;
 
-typedef enum WeaponEnum {
-  axe,
-  moist_nugget,
-  blunderbuss
-} Weapon;
+typedef struct MapStruct {
+  char block[1024];
+  unsigned char max_hmrc;
+  HMRCEmployee hmrc_zombies[21];
+} Map;
+
+void move_player(Player *player);
