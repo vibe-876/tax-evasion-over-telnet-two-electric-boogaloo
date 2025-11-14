@@ -3,7 +3,8 @@
 
 int rooms() {
 
-    Map maps = new_map(15);
+    char chosen_map;
+    Map maps = new_map();
     for(int x = 0; x < 32; x++){
         Map.block[0][x] = '#';
         Map.block[x][0] = '#';
@@ -11,7 +12,7 @@ int rooms() {
         Map.block[x][31] = '#';
     }
 
-    
+
 
     return 0;
 }
