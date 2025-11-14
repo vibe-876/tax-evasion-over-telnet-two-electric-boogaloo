@@ -1,3 +1,6 @@
+#define MAP_SIZE 32
+#define MAX_ZOMBIES 21
+
 typedef enum WeaponEnum {
   axe,
   moist_nugget,
@@ -23,9 +26,10 @@ typedef struct PlayerStruct {
 } Player;
 
 typedef struct MapStruct {
-  char block[1024];
-  unsigned char max_hmrc;
-  HMRCEmployee hmrc_zombies[21];
+  char block[MAP_SIZE][MAP_SIZE];
+  HMRCEmployee hmrc_zombies[MAX_ZOMBIES];
 } Map;
+
+Map new_map();
 
 void move_player(Player *player);
