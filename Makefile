@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-O0 -g
 
 
-teot2eb: $(wildcard *.c)
-	$(CC) $(CFLAGS) -o $@ $^
+teot2eb: $(wildcard *.c) $(wildcard *.h)
+	$(CC) $(CFLAGS) -o $@ $(wildcard *.c)
 
 
 ## Add each bin file here.
