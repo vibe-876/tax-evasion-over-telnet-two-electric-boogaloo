@@ -39,7 +39,13 @@ void make_weapon(char *name, char damage, char fire_rate, WeaponCollection *weap
     add_new_weapon(w, weapons);
 }
 
-void free_room(WeaponCollection *weapons) {
+WeaponCollection init_weapon_collection() {
+    WeaponCollection weapon_coll;
+    weapon_coll.weapon_count = 0;
+    return(weapon_coll);
+}
+
+void free_weapon_coll(WeaponCollection *weapons) {
     free(weapons->weapons);
     weapons->weapon_count = 0;
 }

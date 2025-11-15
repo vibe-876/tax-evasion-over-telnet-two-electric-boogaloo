@@ -15,4 +15,5 @@ void incrementWeaponCount();
 void getWeapons(Weapon *weapons);
 void makeWeapon(char *name, char damage, char fire_rate);
 void add_new_weapon(Weapon w, WeaponCollection *weapons);
-void free_room(WeaponCollection *weapons);
+void free_weapon_coll(WeaponCollection *weapons);
+WeaponCollection init_weapon_collection();
