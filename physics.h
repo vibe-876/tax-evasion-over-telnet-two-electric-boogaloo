@@ -35,8 +35,6 @@ typedef struct BlockStruct {
 typedef struct HMRCEmployeeStruct {
   char x;
   char y;
-  char damage;
-  char health;
 } HMRCEmployee;
 
 typedef struct HMRCEmployeesStruct {

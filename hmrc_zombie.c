@@ -1,5 +1,10 @@
-#include "hmrc.h"
-#include "physics.h"
+#include "hmrc_zombie.h"
+#include <stdio.h>
+//MIGHT WANT TO ADD THE PLAYER SOME HOW SO THAT THE DAMAGE CAN BE DECREASE
+
+int dealDamage(){
+    return hmrc_zombie.damage;
+}
 
 
 /* Might add some "randomness" to this at
