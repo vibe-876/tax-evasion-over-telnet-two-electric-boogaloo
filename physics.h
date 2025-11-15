@@ -1,3 +1,5 @@
+#include "queue.h"
+
 #define MAP_SIZE 32
 #define MAX_ZOMBIES 21
 
@@ -33,5 +35,6 @@ typedef struct MapStruct {
 
 Map new_map();
 void tick(Map *map);
+void player_action(Player *player, Queue *action_queue);
 void move_player(Player *player);
 void move_hmrc(HMRCEmployee hmrc);
