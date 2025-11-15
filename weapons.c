@@ -5,31 +5,37 @@
 #include <stdio.h>
 #include <time.h>
 
-int weaponCount = -1;
+/* Weapon w; */
+/* int weaponCount = -1; */
 
-Weapon generateWeapon(){//Generate random int within weapons size, then return weapons[index]
+/* Generate random int within weapons size,
+ * then return weapons[index]. */
+Weapon generate_weapon(WeaponCollection *weapons) {
     srand(time(0));
-    int randomWeaponIndex = rand() % weaponCount;
-    return weapons[randomWeaponIndex];
+    int randomWeaponIndex = rand() % weapons->weapon_count;
+    return weapons->weapons[randomWeaponIndex];
 }
 
-void addNewWeapon(Weapon w){ //Increment weapons size, and add the new weapons
-    weaponCount++;
-    weapons[weaponCount] = w; 
+void add_new_weapon(Weapon w, WeaponCollection *weapons) { //Increment weapons size, and add the new weapons
+    weapons->weapon_count++;
+    weapons->weapons = (Weapon*) realloc(weapons->weapons, weapons->weapon_count);
+    weapons->weapons[weapons->weapon_count - 1];
 }
 
 
-void getWeapons(){ //Iterate over what stores the weapons and return their
-  for(int i = 0; i < weaponCount; i++){
-    printf("%s\n%c\n%c", weapons[i].name, weapons[i].damage, weapons[i].fireRate);
-  }
-}
+/* This can be replaced by gdb, which is probably
+ * a good habbit to get used to.
+ */
+/* void getWeapons(Weapon *weapons){ //Iterate over what stores the weapons and return their */
+/*   for(int i = 0; i < weaponCount; i++){ */
+/*     printf("%s\n%c\n%c", weapons[i].name, weapons[i].damage, weapons[i].fireRate); */
+/*   } */
+/* } */
 
-Weapon w;
-
-void makeWeapon(char *name, char damage, char fireRate) {
+void make_weapon(char *name, char damage, char fire_rate, WeaponCollection *weapons) {
+  Weapon w;
   w.name = name;
   w.damage = damage;
-  w.fireRate = fireRate;
-  addNewWeapon(w);
+  w.fire_rate = fire_rate;
+  add_new_weapon(w, weapons);
 }
