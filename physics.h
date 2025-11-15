@@ -8,17 +8,27 @@
  */
 typedef char Weapon;
 
-typedef enum ActionUnion {
+enum ActionEnum {
   move,
   attack,
   none
+};
+
+union ActionUnion {
+  char move[2];
+  unsigned char attack;
+  char none;
+};
+
+typedef struct ActionStruct {
+  enum ActionEnum action_enum;
+  union ActionUnion action_union;
 } Action;
 
 typedef struct QueueStruct {
   Action queue[MAX_ACTIONS];
   unsigned char tail;
 } Queue;
-
 
 typedef struct BlockStruct {
   char x;

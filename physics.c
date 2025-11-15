@@ -9,7 +9,7 @@ void tick(State *state) {
 void player_action(State *state) {
   Action next_action = dequeue(&state->player.action_queue);
   
-  switch(next_action) {
+  switch(next_action.action_enum) {
   case move:
     player_move(state);
     break;
@@ -43,8 +43,7 @@ Map new_map() {
   return(map);
 }
 
-
-/* From here are queue function. Originally, these were
+/* From here are queue functions. Originally, these were
  * in their own file, but that is causing circular dependencies,
  * so they're here now. There's a cleaner solution, but this
  * is a game jam, so we're not exactly filled of time for that.
@@ -59,8 +58,13 @@ void enqueue(Queue *queue, Action action) {
   if(queue->tail >= MAX_ACTIONS) return;
   queue->queue[queue->tail++] = action;
 }
-  
+
 Action dequeue(Queue *queue) {
-  if(queue->tail == 0) return(none);
+  if(queue->tail == 0) {
+    union ActionUnion empty_action_union;
+    empty_action_union.none = 0;
+    return((Action) {none, empty_action_union});
+  }
+  
   return(queue->queue[queue->tail--]);
 }
