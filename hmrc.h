@@ -6,4 +6,4 @@
 #define WEST 3
 
 
-char *bfs(Map *map);
+char choose_move(HMRCEmployee *hmrc, Player *player);
