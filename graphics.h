@@ -1,3 +1,6 @@
+#ifndef H_GRAPHICS
+#define H_GRAPHICS
+
 typedef enum {
     Success,
     Failure
@@ -6,10 +9,12 @@ typedef enum {
 typedef struct {
     void(*)() on_connect;
     void(*)() on_disconnect;
-    void(*)() on_recv;
+    void(*)(char) on_recv;
 } EventCallbacks
 
 Result graphics_init(const char* ip, int port, EventCallbacks callbacks);
-void graphics_deinit(Server* server);
-Result graphics_display(char msg, char r, char g, char b);
-Result graphics_display_string(char* msg, char r, char g, char b);
+void graphics_deinit();
+Result graphics_display(char msg, unsigned char r, unsigned char g, unsigned char b);
+Result graphics_display_string(char* msg, unsigned char r, unsigned char g, unsigned char b);
+
+#endif
