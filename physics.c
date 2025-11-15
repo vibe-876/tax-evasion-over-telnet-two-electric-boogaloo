@@ -42,15 +42,6 @@ char hmrc_at_coord(State *state, unsigned char x, unsigned char y) {
   return(0);
 }
 
-Map new_map() {
-  Map map;
-  for(int i = 0; i < MAP_SIZE; i++)
-    for(int j = 0; j < MAP_SIZE; j++)
-      map.block[i][j] = 0;
-
-  return(map);
-}
-
 /* From here are queue functions. Originally, these were
  * in their own file, but that is causing circular dependencies,
  * so they're here now. There's a cleaner solution, but this

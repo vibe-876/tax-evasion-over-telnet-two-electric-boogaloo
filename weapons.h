@@ -1,5 +1,5 @@
 typedef struct WeaponStruct {
-    char[8] name;
+    char name[16];
     char damage;
-    char fireRate;
+    char fire_rate;
 }Weapon;
