@@ -17,6 +17,9 @@ void player_action(State *state) {
   case attack:
     player_attack(state);
     break;
+
+  case none:
+    break;
   }
 }
 

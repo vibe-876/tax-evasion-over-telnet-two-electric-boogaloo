@@ -16,7 +16,7 @@ typedef enum ActionUnion {
 
 typedef struct QueueStruct {
   Action queue[MAX_ACTIONS];
-  char tail;
+  unsigned char tail;
 } Queue;
 
 
@@ -38,14 +38,14 @@ typedef struct HMRCEmployeesStruct {
 } HMRCEmployees;
 
 typedef struct PlayerStruct {
-  char x;
-  char y;
+  unsigned char x;
+  unsigned char y;
   Weapon weapon;
   Queue action_queue;
 } Player;
 
 typedef struct MapStruct {
-  char block[MAP_SIZE][MAP_SIZE];
+  unsigned char block[MAP_SIZE][MAP_SIZE];
 } Map;
 
 typedef struct StateStruct {
