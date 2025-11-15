@@ -17,7 +17,7 @@ Weapon generate_weapon(WeaponCollection *weapons) {
 
 void add_new_weapon(Weapon w, WeaponCollection *weapons) { //Increment weapons size, and add the new weapons
     weapons->weapon_count++;
-    weapons->weapons = (Weapon*) realloc(weapons->weapons, weapons->weapon_count);
+    weapons->weapons = realloc(weapons->weapons, weapons->weapon_count * sizeof weapons->weapons);
     weapons->weapons[weapons->weapon_count - 1];
 }
 
@@ -38,3 +38,9 @@ void make_weapon(char *name, char damage, char fire_rate, WeaponCollection *weap
     w.fire_rate = fire_rate;
     add_new_weapon(w, weapons);
 }
+
+void free_room(WeaponCollection *weapons) {
+    free(weapons->weapons);
+    weapons->weapon_count = 0;
+}
+  

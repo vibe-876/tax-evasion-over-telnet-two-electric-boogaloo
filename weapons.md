@@ -25,3 +25,7 @@ It does the same as the original, but with the `WeaponCollection` struct.
 
 - `void make_weapon(char *name, char damage, char fire_rate, WeaponCollection *weapons)`
 Still doing the same thing, but (same as `add_new_weapon`) we're now explicitly passing the `WeaponCollection` struct.
+
+- `void free_room(WeaponCollection *weapons);`
+Should be called once the room is done with, deallocates all of the weapons that were in memory.
+**If this isn't called, there will be a memory leak!**
