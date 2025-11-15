@@ -61,5 +61,6 @@ void player_action(State *state);
 void player_move(State *state);
 void player_attack(State *state);
 void move_hmrc(HMRCEmployee hmrc);
+Queue *init_queue();
 void enqueue(Queue *queue, Action action);
 Action dequeue(Queue *queue);

@@ -49,12 +49,18 @@ Map new_map() {
  * so they're here now. There's a cleaner solution, but this
  * is a game jam, so we're not exactly filled of time for that.
  */
-void enqueue(Queue* queue, Action action) {
+Queue *init_queue() {
+  Queue *queue = malloc(sizeof *queue);
+  queue->tail = 0;
+  return(queue);
+}
+
+void enqueue(Queue *queue, Action action) {
   if(queue->tail >= MAX_ACTIONS) return;
-  queue->queue[++queue->tail] = action;
+  queue->queue[queue->tail++] = action;
 }
   
-Action dequeue(Queue* queue) {
+Action dequeue(Queue *queue) {
   if(queue->tail == 0) return(none);
   return(queue->queue[queue->tail--]);
 }
