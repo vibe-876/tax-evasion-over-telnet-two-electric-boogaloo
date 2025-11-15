@@ -1,9 +1,24 @@
-#include "queue.h"
-
 #define MAP_SIZE 32
 #define MAX_ZOMBIES 20
+#define MAX_ACTIONS 16
 
+/* This is only here to throw a compile-time error
+ * after merging, to remind us to link up the physics
+ * and the weapons.
+ */
 typedef char Weapon;
+
+typedef enum ActionUnion {
+  move,
+  attack,
+  none
+} Action;
+
+typedef struct QueueStruct {
+  Action queue[MAX_ACTIONS];
+  char tail;
+} Queue;
+
 
 typedef struct BlockStruct {
   char x;
@@ -46,3 +61,5 @@ void player_action(State *state);
 void player_move(State *state);
 void player_attack(State *state);
 void move_hmrc(HMRCEmployee hmrc);
+void enqueue(Queue *queue, Action action);
+Action dequeue(Queue *queue);
