@@ -1,7 +1,7 @@
 typedef struct WeaponStruct {
-    char *name;
-    char damage;
-    char fire_rate;
+    char name[16];
+    char damage[2];
+    char fire_rate[2];
 } Weapon;
 
 typedef struct WeaponCollectionStruct {
@@ -10,10 +10,24 @@ typedef struct WeaponCollectionStruct {
 } WeaponCollection;
 
 
-Weapon generateWeapon(WeaponCollection *weapon);
-void incrementWeaponCount();
-void getWeapons(Weapon *weapons);
-void makeWeapon(char *name, char damage, char fire_rate);
-void add_new_weapon(Weapon w, WeaponCollection *weapons);
-void free_weapon_coll(WeaponCollection *weapons);
-WeaponCollection init_weapon_collection();
+Weapon weapons[5] = {};
+
+Weapon axe;
+axe.name = "axe";
+axe.damage = "5";
+axe.fire_rate = "1";
+weapons[0] = axe;
+
+Weapon moist_nugget;
+moist_nugget.name = "moist_nugget";
+moist_nugget.damage = "50";
+moist_nugget.fire_rate = "1";
+weapons[1] = moist_nugget;
+
+Weapon blunder_buss;
+blunder_buss.name = "blunder_buss";
+blunder_buss.damage = "80";
+blunder_buss.fire_rate = "3";
+weapons[2] = blunder_buss;
+
+//Now conceptualise 2 more weapons later xxx

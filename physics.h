@@ -1,11 +1,11 @@
 #define MAP_SIZE 32
 #define MAX_ZOMBIES 21
 
-typedef enum WeaponEnum {
+enum WeaponEnum {
   axe,
   moist_nugget,
   blunderbuss
-} Weapon;
+};
 
 typedef struct BlockStruct {
   char x;
@@ -22,7 +22,7 @@ typedef struct HMRCEmployeeStruct {
 typedef struct PlayerStruct {
   char x;
   char y;
-  Weapon weapon;
+  enum WeaponEnum weapon;
 } Player;
 
 typedef struct MapStruct {
