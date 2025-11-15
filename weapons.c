@@ -45,7 +45,17 @@ Weapon init_weapons() {
   blunder_buss.fire_rate = 3;
   weapons[2] = blunder_buss;
 
-  //Now conceptualise 2 more weapons later xxx
+  Weapon hush_puppy;
+  strcpy(hush_puppy.name, "hush_puppy");
+  hush_puppy.damage = 20;
+  hush_puppy.fire_rate = 1;
+  weapons[3] = hush_puppy;
+
+  Weapon katana;
+  strcpy(katana.name, "katana");
+  katana.damage = 100;
+  katana.fire_rate = 3;
+  weapons[4] = katana;
 }
   /* This can probably be replaced by gdb, which is
    * probably a good habbit to get used to.
