@@ -11,11 +11,11 @@ void player_action(State *state) {
   
   switch(next_action.action_enum) {
   case move:
-    player_move(state);
+    player_move(state, next_action);
     break;
 
   case attack:
-    player_attack(state);
+    player_attack(state, next_action);
     break;
 
   case none:
@@ -23,16 +23,16 @@ void player_action(State *state) {
   }
 }
 
-void player_move(State *state) {
+void player_move(State *state, Action next_action) {
   /* For now, we assume that the direction is /always/ right.
    * We also assume that the only thing you can move through is
    * represented by a space character (0x5f).
    */
-  if(state->map.block[state->player.x + 1][state->player.y] == ' ') return;
+  if(state->map.block[state->player.x + next_action.action_union.move[0]][state->player.y + next_action.action_union.move[1]] != ' ') return;
   state->player.x += 1;
 }
 
-void player_attack(State *state) { return; }
+void player_attack(State *state, Action next_action) { return; }
 
 Map new_map() {
   Map map;

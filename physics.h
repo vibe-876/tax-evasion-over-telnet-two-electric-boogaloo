@@ -68,8 +68,8 @@ typedef struct StateStruct {
 Map new_map();
 void tick(State *state);
 void player_action(State *state);
-void player_move(State *state);
-void player_attack(State *state);
+void player_move(State *state, Action next_action);
+void player_attack(State *state, Action next_action);
 void move_hmrc(HMRCEmployee hmrc);
 Queue *init_queue();
 void enqueue(Queue *queue, Action action);
