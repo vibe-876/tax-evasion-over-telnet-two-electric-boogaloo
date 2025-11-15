@@ -20,7 +20,12 @@ void player_action(State *state) {
   }
 }
 
-void player_move(State *state) { return; }
+void player_move(State *state) {
+  /* For now, we assume that the direction is /always/ right. */
+  if(state->map.block[state->player.x + 1][state->player.y] == '#') return;
+  state->player.x += 1;
+}
+
 void player_attack(State *state) { return; }
 
 Map new_map() {

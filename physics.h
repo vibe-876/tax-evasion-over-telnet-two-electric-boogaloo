@@ -1,13 +1,9 @@
 #include "queue.h"
 
 #define MAP_SIZE 32
-#define MAX_ZOMBIES 21
+#define MAX_ZOMBIES 20
 
-typedef enum WeaponEnum {
-  axe,
-  moist_nugget,
-  blunderbuss
-} Weapon;
+typedef char Weapon;
 
 typedef struct BlockStruct {
   char x;
@@ -22,7 +18,7 @@ typedef struct HMRCEmployeeStruct {
 } HMRCEmployee;
 
 typedef struct HMRCEmployeesStruct {
-  HMRCEmployee hmrc_employees[20];
+  HMRCEmployee hmrc_employees[MAX_ZOMBIES];
   char index;
 } HMRCEmployees;
 
@@ -35,7 +31,6 @@ typedef struct PlayerStruct {
 
 typedef struct MapStruct {
   char block[MAP_SIZE][MAP_SIZE];
-  HMRCEmployee hmrc_zombies[MAX_ZOMBIES];
 } Map;
 
 typedef struct StateStruct {
