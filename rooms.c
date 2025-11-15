@@ -2,13 +2,12 @@
 #include <stdio.h>
 
 int rooms() {
-
-    Map maps = new_map(15);
+    Map maps = new_map();
     for(int x = 0; x < 32; x++){
-        Map.block[0][x] = '#';
-        Map.block[x][0] = '#';
-        Map.block[31][x] = '#';
-        Map.block[x][31] = '#';
+        maps.block[0][x] = '#';
+        maps.block[x][0] = '#';
+        maps.block[31][x] = '#';
+        maps.block[x][31] = '#';
     }
 
     
