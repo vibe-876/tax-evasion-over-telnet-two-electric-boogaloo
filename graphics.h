@@ -1,6 +1,8 @@
 #ifndef H_GRAPHICS
 #define H_GRAPHICS
 
+#include <stdint.h>
+
 typedef enum {
     Success,
     Failure
@@ -14,7 +16,7 @@ typedef struct {
 
 Result graphics_init(const char* ip, int port, EventCallbacks callbacks);
 void graphics_deinit();
-Result graphics_display(char msg, unsigned char r, unsigned char g, unsigned char b);
-Result graphics_display_string(char* msg, unsigned char r, unsigned char g, unsigned char b);
+Result graphics_display(char c, uint32_t bg, uint32_t fg);
+Result graphics_display_string(char* msg, uint32_t bg, uint32_t fg);
 
 #endif
