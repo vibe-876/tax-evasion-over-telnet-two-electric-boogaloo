@@ -1,12 +1,9 @@
+#include "weapons.h"
+
 #define MAP_SIZE 32
 #define MAX_ZOMBIES 20
 #define MAX_ACTIONS 16
 
-/* This is only here to throw a compile-time error
- * after merging, to remind us to link up the physics
- * and the weapons.
- */
-typedef char Weapon;
 
 enum ActionEnum {
   move,
