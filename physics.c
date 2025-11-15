@@ -21,8 +21,11 @@ void player_action(State *state) {
 }
 
 void player_move(State *state) {
-  /* For now, we assume that the direction is /always/ right. */
-  if(state->map.block[state->player.x + 1][state->player.y] == '#') return;
+  /* For now, we assume that the direction is /always/ right.
+   * We also assume that the only thing you can move through is
+   * represented by a space character (0x5f).
+   */
+  if(state->map.block[state->player.x + 1][state->player.y] == ' ') return;
   state->player.x += 1;
 }
 
