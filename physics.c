@@ -3,7 +3,7 @@
 
 
 void tick(State *state) {
-  return;
+  player_action(state);
 }
 
 void player_action(State *state) {
@@ -24,9 +24,8 @@ void player_action(State *state) {
 }
 
 void player_move(State *state, Action next_action) {
-  /* For now, we assume that the direction is /always/ right.
-   * We also assume that the only thing you can move through is
-   * represented by a space character (0x5f).
+  /* We also assume that the only thing you can move through
+   * is represented by a space character (0x5f).
    */
   if(state->map.block[state->player.x + next_action.action_union.move[0]][state->player.y + next_action.action_union.move[1]] != ' ') return;
   state->player.x += 1;
