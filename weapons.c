@@ -9,44 +9,22 @@
 /* Generate random int within weapons size,
  * then return the corresponding weapon.
  */
-Weapon generate_weapon(WeaponCollection *weapons) {
+
+Weapon weapons[5] = {};
+
+Weapon axe;
+axe.name = "axe";
+axe.damage = "5";
+axe.fire_rate = "1";
+weapons[0] = axe;
+
+
+Weapon generate_weapon(Weapon weapon[]) {
     srand(time(0));
-    int randomWeaponIndex = rand() % weapons->weapon_count;
-    return weapons->weapons[randomWeaponIndex];
+    int randomWeaponIndex = rand() % weapon[].length;
+    return weaponArray[randomWeaponIndex];
 }
-
-void add_new_weapon(Weapon w, WeaponCollection *weapons) { //Increment weapons size, and add the new weapons
-    weapons->weapon_count++;
-    weapons->weapons = realloc(weapons->weapons, weapons->weapon_count * sizeof weapons->weapons);
-    weapons->weapons[weapons->weapon_count - 1];
-}
-
 
 /* This can probably be replaced by gdb, which is
  * probably a good habbit to get used to.
  */
-void print_weapons(WeaponCollection *weapons) {
-    for(int i = 0; i < weapons->weapon_count; i++)
-        printf("%s\t%d\t%d\n", weapons->weapons[i].name, weapons->weapons[i].damage, weapons->weapons[i].fire_rate);
-}
-
-
-void make_weapon(char *name, char damage, char fire_rate, WeaponCollection *weapons) {
-    Weapon w;
-    w.name = name;
-    w.damage = damage;
-    w.fire_rate = fire_rate;
-    add_new_weapon(w, weapons);
-}
-
-WeaponCollection init_weapon_collection() {
-    WeaponCollection weapon_coll;
-    weapon_coll.weapon_count = 0;
-    return(weapon_coll);
-}
-
-void free_weapon_coll(WeaponCollection *weapons) {
-    free(weapons->weapons);
-    weapons->weapon_count = 0;
-}
-  

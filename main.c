@@ -4,7 +4,6 @@
 #include "weapons.h"
 
 int main(){
-  makeWeapon("axe", '10', '1');
-  getWeapons();
+  makeWeapon("axe", '5', '1');
   return 0;
 }
