@@ -21,10 +21,16 @@ typedef struct HMRCEmployeeStruct {
   char health;
 } HMRCEmployee;
 
+typedef struct HMRCEmployeesStruct {
+  HMRCEmployee hmrc_employees[20];
+  char index;
+} HMRCEmployees;
+
 typedef struct PlayerStruct {
   char x;
   char y;
   Weapon weapon;
+  Queue action_queue;
 } Player;
 
 typedef struct MapStruct {
@@ -32,9 +38,16 @@ typedef struct MapStruct {
   HMRCEmployee hmrc_zombies[MAX_ZOMBIES];
 } Map;
 
+typedef struct StateStruct {
+  Map map;
+  Player player;
+  HMRCEmployees hmrcs;
+} State;
+
 
 Map new_map();
-void tick(Map *map);
-void player_action(Player *player, Queue *action_queue);
-void move_player(Player *player);
+void tick(State *state);
+void player_action(State *state);
+void player_move(State *state);
+void player_attack(State *state);
 void move_hmrc(HMRCEmployee hmrc);

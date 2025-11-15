@@ -7,8 +7,6 @@
  * obstacle avoidance.
  */
 char choose_move(HMRCEmployee *hmrc, Player *player) {
-  char path;
-
   char path_to_player_x = player->x - hmrc->x;
   char path_to_player_y = player->y - hmrc->y;
   

@@ -2,13 +2,26 @@
 #include "queue.h"
 
 
-void tick(Map *map) {
+void tick(State *state) {
   return;
 }
 
-void player_action(Player *player, Queue *action_queue) {
-  return;
+void player_action(State *state) {
+  Action next_action = dequeue(&state->player.action_queue);
+  
+  switch(next_action) {
+  case move:
+    player_move(state);
+    break;
+
+  case attack:
+    player_attack(state);
+    break;
+  }
 }
+
+void player_move(State *state) { return; }
+void player_attack(State *state) { return; }
 
 Map new_map() {
   Map map;
