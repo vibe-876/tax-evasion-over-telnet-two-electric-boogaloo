@@ -70,6 +70,7 @@ void tick(State *state);
 void player_action(State *state);
 void player_move(State *state, Action next_action);
 void player_attack(State *state, Action next_action);
+char hmrc_at_coord(State *state, unsigned char x, unsigned char y);
 void move_hmrc(HMRCEmployee hmrc);
 Queue *init_queue();
 void enqueue(Queue *queue, Action action);

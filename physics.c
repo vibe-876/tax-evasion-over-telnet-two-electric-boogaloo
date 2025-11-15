@@ -31,7 +31,16 @@ void player_move(State *state, Action next_action) {
   state->player.x += 1;
 }
 
-void player_attack(State *state, Action next_action) { return; }
+void player_attack(State *state, Action next_action) {
+  return;
+}
+
+char hmrc_at_coord(State *state, unsigned char x, unsigned char y) {
+  for(int i = 0; i < state->hmrcs.index; i++)
+    if(state->hmrcs.hmrc_employees[i].x == x && state->hmrcs.hmrc_employees[i].y == y)
+      return(1);
+  return(0);
+}
 
 Map new_map() {
   Map map;
