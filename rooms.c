@@ -184,13 +184,16 @@ void print_room(){
 
             switch(c) {
                 case '#':
-                    graphics_display(c, 230, 142, 10);
+		  printf("%c, %d, %d, %d\n", c, 230, 142, 10);
+                    /* graphics_display(c, 230, 142, 10); */
                     break;
                 case 'W':
-                    graphics_display(c, 255, 255, 255);
+		  printf("%c, %d, %d, %d\n", c, 255, 255, 255);
+                    /* graphics_display(c, 255, 255, 255); */
                     break;
                 case 'C':
-                    graphics_display(c, 247, 197, 247);
+		  printf("%c, %d, %d, %d\n", c, 247, 197, 247);
+                    /* graphics_display(c, 247, 197, 247); */
                 
             }
         }
