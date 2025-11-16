@@ -8,14 +8,63 @@
 #include <pthread.h>
 
 static int server_sock;
+static int client_sock;
 static EventCallbacks cb;
+
+enum InputState {
+    NORMAL,
+    IAC
+};
 
 /// Privately scoped function that runs the main input loop
 void* input_loop(void* arg) {
+    static enum InputState state = NORMAL;
+
+    unsigned char buf[1];
+    unsigned char consumer[3];
+
     for (;;) {
+        // Wait for next input
+        recv(client_sock, buf, 1, 0);
+
         // Consuming IAC
-        
-        // Running on_recv for next letter
+        switch (buf[0]) {
+            case 255:
+                if (state == NORMAL) {
+                    state = IAC;
+                } else {
+                    state = NORMAL;
+                    cb.on_recv(255);
+                }
+
+                break;
+
+            case 250:   // 2 bytes and fucks with everything
+                recv(client_sock, consumer, 2, 0);
+                break;
+
+            case 251:   // 3 bytes
+            case 252:
+            case 253:
+            case 254:
+                if (state == IAC) {
+                    recv(client_sock, consumer, 3, 0);
+                    state = NORMAL;
+                    break;
+                }
+
+                // Else fall through to default case
+
+            default:
+                if (state == IAC) { // 2 bytes
+                    recv(client_sock, consumer, 2, 0);
+                    state = NORMAL;
+                } else {            // Run on_recv
+                    cb.on_recv(buf[0]);
+                }
+
+                break;
+        }
     }
 
     return NULL;
@@ -41,10 +90,14 @@ Result graphics_init(const char* ip, int port, EventCallbacks callbacks) {
     bind(server_sock, (const struct sockaddr*) &addr, sizeof(addr));
 
     // Wait for a connection
-    listen(server_sock, 1);
+    if (listen(server_sock, 1) == -1)
+        return Failure;
 
-    int cli_len = sizeof(cli_addr);
-    accept(server_sock, (struct sockaddr*) &cli_addr, &cli_len);
+    socklen_t cli_len = sizeof(cli_addr);
+    client_sock = accept(server_sock, (struct sockaddr*) &cli_addr, &cli_len);
+
+    if (client_sock == -1)
+        return Failure;
 
     // Running callback
     cb = callbacks;
@@ -54,8 +107,7 @@ Result graphics_init(const char* ip, int port, EventCallbacks callbacks) {
     pthread_t thread;
     pthread_create(&thread, NULL, input_loop, NULL);
 
-    // TODO
-
+    // Returning success
     return Success;
 }
 
@@ -74,12 +126,12 @@ Result graphics_display(char c, uint32_t bg, uint32_t fg) {
     // Construct the message
     char msg[50] = {0};
 
-    sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%c\003[0m", 
+    sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%c\033[0m", 
         (fg >> 16) & 0xFF, (fg >> 8) & 0xFF, (fg) & 0xFF,
         (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF, c);
 
     // Send and check for failure/success
-    ssize_t s = send(server_sock, msg, sizeof(msg), 0); // TODO: IAC handling
+    ssize_t s = send(client_sock, msg, sizeof(msg), 0); // TODO: IAC handling
 
     if (s == -1)
        return Failure;
@@ -94,12 +146,12 @@ Result graphics_display_string(char* str, uint32_t bg, uint32_t fg) {
     int msg_len = strnlen(str, 32*32 + 1); // TODO change this to MAP_SIZE
     char msg[msg_len + 50];
 
-    sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%s\003[0m", 
+    sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%s\033[0m", 
         (fg >> 16) & 0xFF, (fg >> 8) & 0xFF, (fg) & 0xFF,
         (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF, str);
 
     // Send and check for failure/success
-    ssize_t s = send(server_sock, msg, msg_len + 50, 0); // TODO: IAC handling
+    ssize_t s = send(client_sock, msg, msg_len + 50, 0); // TODO: IAC handling
 
     if (s == -1)
        return Failure;
@@ -116,16 +168,23 @@ void test() {
 }
 
 void testp(char c) {
-    printf("Input: %c\n");
+    printf("Input: %c\n", c);
 }
 
 int main(void) {
     EventCallbacks c = (EventCallbacks) {test, test, testp};
 
-    if (graphics_init("127.0.0.1", 8080, c) != Success) 
-        printf("error: init");
-    if (graphics_display('x', 0xFF, 0xFF0000) != Success)
-        printf("error: display"); 
+    if (graphics_init("127.0.0.1", 8080, c) != Success) {
+        printf("error: init\n");
+        return 1;
+    }
+
+    if (graphics_display('x', 0xFF, 0xFF0000) != Success) {
+        printf("error: display\n"); 
+        return 1;
+    }
+
+    for (;;) {}
 
     graphics_deinit(); 
 }
