@@ -5,7 +5,7 @@
 Zombie generate_zombie(){
     Zombie z;
     z.health = 50;
-    z.damage = randint() % 21;
+    z.damage = rand() % 21;
     return z;
 }
 
