@@ -76,7 +76,7 @@ Result graphics_display(char c, uint32_t bg, uint32_t fg) {
 
     sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%c\003[0m", 
         (fg >> 16) & 0xFF, (fg >> 8) & 0xFF, (fg) & 0xFF,
-        (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF);
+        (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF, c);
 
     // Send and check for failure/success
     ssize_t s = send(server_sock, msg, sizeof(msg), 0); // TODO: IAC handling
@@ -89,8 +89,22 @@ Result graphics_display(char c, uint32_t bg, uint32_t fg) {
 
 
 /// Sends a ANSI colored string to the connected user
-Result graphics_display_string(char* msg, uint32_t bg, uint32_t fg) {
+Result graphics_display_string(char* str, uint32_t bg, uint32_t fg) {
+    // Construct the message 
+    int msg_len = strnlen(str, 32*32 + 1); // TODO change this to MAP_SIZE
+    char msg[msg_len + 50];
 
+    sprintf(msg, "\033[38;2;%d;%d;%dm\033[48;2;%d;%d;%dm%s\003[0m", 
+        (fg >> 16) & 0xFF, (fg >> 8) & 0xFF, (fg) & 0xFF,
+        (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF, str);
+
+    // Send and check for failure/success
+    ssize_t s = send(server_sock, msg, msg_len + 50, 0); // TODO: IAC handling
+
+    if (s == -1)
+       return Failure;
+
+    return Success;
 }
 
 
@@ -115,3 +129,4 @@ int main(void) {
 
     graphics_deinit(); 
 }
+
