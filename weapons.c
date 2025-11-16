@@ -20,10 +20,10 @@ static Weapon weapons[5];
 /* weapons[0] = axe; */
 
 
-Weapon generate_weapon(Weapon *weapon_array) {
+Weapon generate_weapon() {
     srand(time(0));
-    int random_weapon_index = rand() % sizeof(weapon_array) / sizeof(weapon_array[0]);
-    return weapon_array[random_weapon_index];
+    int random_weapon_index = rand() % 5;
+    return weapons[random_weapon_index];
 }
 
 Weapon init_weapons() {

@@ -2,7 +2,10 @@
 #include "main.h"
 #include "physics.h"
 
+Weapon weapons[5];
+
 int main(){
-  //makeWeapon("axe", '5', '1');
+  init_weapons();
+  generate_weapon();
   return 0;
 }
