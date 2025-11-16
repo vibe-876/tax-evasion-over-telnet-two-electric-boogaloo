@@ -5,8 +5,22 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <pthread.h>
 
 static int server_sock;
+static EventCallbacks cb;
+
+/// Privately scoped function that runs the main input loop
+void* input_loop(void* arg) {
+    for (;;) {
+        // Consuming IAC
+        
+        // Running on_recv for next letter
+    }
+
+    return NULL;
+}
+
 
 /// Sets up the server socket and waits for a connection
 Result graphics_init(const char* ip, int port, EventCallbacks callbacks) {
@@ -32,6 +46,16 @@ Result graphics_init(const char* ip, int port, EventCallbacks callbacks) {
     int cli_len = sizeof(cli_addr);
     accept(server_sock, (struct sockaddr*) &cli_addr, &cli_len);
 
+    // Running callback
+    cb = callbacks;
+    cb.on_connect();
+
+    // Setting up input thread
+    pthread_t thread;
+    pthread_create(&thread, NULL, input_loop, NULL);
+
+    // TODO
+
     return Success;
 }
 
@@ -41,6 +65,7 @@ void graphics_deinit() {
     shutdown(server_sock, SHUT_RDWR);
     close(server_sock);
     server_sock = -1;
+    cb.on_disconnect();
 }
 
 
@@ -68,21 +93,22 @@ Result graphics_display_string(char* msg, uint32_t bg, uint32_t fg) {
 
 }
 
-/// Takes a user input
-int graphics_input() {
-    // Consuming IAC
-    
-    // Returning next letter
+
+
+/////////////////////////////
+
+void test() {
+    printf("test\n");
 }
 
-void test() {}
-
-void testp(char c) {}
+void testp(char c) {
+    printf("Input: %c\n");
+}
 
 int main(void) {
-    EventCallbacks cb = (EventCallbacks) {test, test, testp};
+    EventCallbacks c = (EventCallbacks) {test, test, testp};
 
-    if (graphics_init("127.0.0.1", 8080, cb) != Success) 
+    if (graphics_init("127.0.0.1", 8080, c) != Success) 
         printf("error: init");
     if (graphics_display('x', 0xFF, 0xFF0000) != Success)
         printf("error: display"); 
