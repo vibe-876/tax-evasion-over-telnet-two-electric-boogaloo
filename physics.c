@@ -3,8 +3,7 @@
 
 
 void tick(State *state) {
-  player_action(state);
-  
+  player_action(state);  
 }
 
 void player_action(State *state) {
@@ -33,9 +32,36 @@ void player_move(State *state, Action next_action) {
 }
 
 void player_attack(State *state, Action next_action) {
+  switch(state->player.weapon.name[0]) {
+  case 'a':
+    attack_hmrc_at_coord(state,
+			 state->player.x + state->player.direction[0],
+			 state->player.y + state->player.direction[1],
+			 state->player.weapon);
+    break;
+  case 'm':
+    break;
+  case 'b':
+    break;
+  case 'h':
+    break;
+  case 'k':
+    break;
+  default:
+    int *px = 0x0;
+    int x = 1;
+    x += *px;
+  }
+
   return;
 }
 
+void attack_hmrc_at_coord(State *state, unsigned char x, unsigned char y, Weapon weapon) {
+  if(hmrc_at_coord(state, x, y)) {
+    
+  }
+}
+  
 char hmrc_at_coord(State *state, unsigned char x, unsigned char y) {
   for(int i = 0; i < state->hmrcs.index; i++)
     if(state->hmrcs.hmrc_employees[i].x == x && state->hmrcs.hmrc_employees[i].y == y)

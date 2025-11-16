@@ -43,6 +43,7 @@ typedef struct HMRCEmployeesStruct {
 } HMRCEmployees;
 
 typedef struct PlayerStruct {
+  unsigned char direction[2];
   unsigned char x;
   unsigned char y;
   Weapon weapon;
@@ -70,3 +71,4 @@ void move_hmrc(HMRCEmployee hmrc);
 Queue *init_queue();
 void enqueue(Queue *queue, Action action);
 Action dequeue(Queue *queue);
+void attack_hmrc_at_coord(State *state, unsigned char x, unsigned char y, Weapon weapon);
