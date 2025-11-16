@@ -54,7 +54,7 @@ Result graphics_display(char c, uint32_t bg, uint32_t fg) {
         (bg >> 16) & 0xFF, (bg >> 8) & 0xFF, (bg) & 0xFF);
 
     // Send and check for failure/success
-    ssize_t s = send(server_sock, msg, sizeof(msg), 0);
+    ssize_t s = send(server_sock, msg, sizeof(msg), 0); // TODO: IAC handling
 
     if (s == -1)
        return Failure;
@@ -68,7 +68,15 @@ Result graphics_display_string(char* msg, uint32_t bg, uint32_t fg) {
 
 }
 
+/// Takes a user input
+int graphics_input() {
+    // Consuming IAC
+    
+    // Returning next letter
+}
+
 void test() {}
+
 void testp(char c) {}
 
 int main(void) {
