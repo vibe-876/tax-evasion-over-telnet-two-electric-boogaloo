@@ -175,27 +175,27 @@ Result graphics_reset_cursor() {
 }
 
 
-void test() {
-    printf("test\n");
-}
+/* void test() { */
+/*     printf("test\n"); */
+/* } */
 
-void testp(char c) {
-    printf("Input: %c\n", c);
-}
+/* void testp(char c) { */
+/*     printf("Input: %c\n", c); */
+/* } */
 
-int main(void) {
-    EventCallbacks c = (EventCallbacks) {test, test, testp};
+/* int main(void) { */
+/*     EventCallbacks c = (EventCallbacks) {test, test, testp}; */
 
-    if (graphics_init("127.0.0.1", 8080, c) != Success) {
-        printf("error: init\n");
-        return 1;
-    }
+/*     if (graphics_init("127.0.0.1", 8080, c) != Success) { */
+/*         printf("error: init\n"); */
+/*         return 1; */
+/*     } */
 
 
-    for (;;) {
-        graphics_reset_cursor();
-        graphics_display('x', 0xFF, 0xFF0000);
-    }
+/*     for (;;) { */
+/*         graphics_reset_cursor(); */
+/*         graphics_display('x', 0xFF, 0xFF0000); */
+/*     } */
 
-    graphics_deinit(); 
-}
+/*     graphics_deinit();  */
+/* } */
