@@ -3,3 +3,6 @@ typedef struct WeaponStruct {
     char damage;
     char fire_rate;
 } Weapon;
+
+void init_weapons();
+Weapon generate_weapon();

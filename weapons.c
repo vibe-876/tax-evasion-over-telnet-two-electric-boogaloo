@@ -26,7 +26,7 @@ Weapon generate_weapon() {
     return weapons[random_weapon_index];
 }
 
-Weapon init_weapons() {
+void init_weapons() {
   Weapon axe;
   strcpy(axe.name, "axe");
   axe.damage = 5;
