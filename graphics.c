@@ -160,8 +160,20 @@ Result graphics_display_string(char* str, uint32_t bg, uint32_t fg) {
 }
 
 
+/// Sets cursor to 0,0
+Result graphics_reset_cursor() {
+    // Construct message
+    char msg[] = "\033[0;0H";
 
-/*
+    // Send and check for failure/success
+    ssize_t s = send(client_sock, msg, sizeof(msg), 0); // TODO: IAC handling
+
+    if (s == -1)
+       return Failure;
+
+    return Success;
+}
+
 
 void test() {
     printf("test\n");
@@ -179,14 +191,11 @@ int main(void) {
         return 1;
     }
 
-    if (graphics_display('x', 0xFF, 0xFF0000) != Success) {
-        printf("error: display\n"); 
-        return 1;
-    }
 
-    for (;;) {}
+    for (;;) {
+        graphics_reset_cursor();
+        graphics_display('x', 0xFF, 0xFF0000);
+    }
 
     graphics_deinit(); 
 }
-
-*/
