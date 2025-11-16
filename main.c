@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "main.h"
 #include "physics.h"
+#include "graphics.h"
 
 #include "weapons.h"
 #include "graphics.h"
@@ -17,10 +18,28 @@ void on_recv(char c) { // WARNING THIS RUNS MULTITHREADED PLS NO RAZE CONDITON /
 
 }
 
+void on_conn() {
+
+}
+
+void on_disconn() {
+
+}
+
+void on_input(char c) {
+
+}
+
 int main(){
-  graphics_init("127.0.0.1", 8080, (EventCallbacks){on_connect, on_disconnect, on_recv});
-  graphics_reset_cursor();
+  // Setup
+  graphics_init("127.0.0.1", 8080, (EventCallbacks) {on_conn, on_disconn, on_input});
+  init_weapons();
+  generate_weapon();
+
+  // Mainloop
+
+  // Teardown
   graphics_deinit();
-  //makeWeapon("axe", '5', '1');
+  
   return 0;
 }
