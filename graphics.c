@@ -161,7 +161,7 @@ Result graphics_display_string(char* str, uint32_t bg, uint32_t fg) {
 
 
 
-/////////////////////////////
+/*
 
 void test() {
     printf("test\n");
@@ -189,3 +189,4 @@ int main(void) {
     graphics_deinit(); 
 }
 
+*/
