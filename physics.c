@@ -4,6 +4,7 @@
 
 void tick(State *state) {
   player_action(state);
+  
 }
 
 void player_action(State *state) {

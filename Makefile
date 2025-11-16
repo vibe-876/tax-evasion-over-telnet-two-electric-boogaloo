@@ -1,5 +1,5 @@
-CC=gcc
-CFLAGS=-O0 -g #-Wall -Wextra
+CC=clang
+CFLAGS=-O0 -g -Wall
 
 
 teot2eb: $(wildcard *.c) $(wildcard *.h)
