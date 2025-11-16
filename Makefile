@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-O0 -g
+CFLAGS=-O0 -g -Wall
 
 
 teot2eb: $(wildcard *.c) $(wildcard *.h)
